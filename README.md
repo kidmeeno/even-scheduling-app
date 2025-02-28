@@ -37,8 +37,8 @@ The **Event Scheduler App** is a mobile application built using **React Native**
 ## 🔧 Installation & Setup
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/your-username/EventSchedulerApp.git
-   cd EventSchedulerApp
+   git clone https://github.com/kidmeeno/even-scheduling-app.git
+   cd even-scheduling-app
    ```
 2. **Install dependencies:**
    ```sh
@@ -50,7 +50,7 @@ The **Event Scheduler App** is a mobile application built using **React Native**
    ```
 3. **Start the Expo development server:**
    ```sh
-   expo start
+   npm start
    ```
 4. **Run on an emulator or physical device:**
    - Scan the QR code from the Expo Go app on your phone.
@@ -80,7 +80,6 @@ The **Event Scheduler App** is a mobile application built using **React Native**
 
 ## 🚀 Future Enhancements
 - ⏰ **Event Notifications & Reminders**
-- 🗄️ **Local Storage for Event Persistence**
 - 🎨 **Dark Mode Support**
 - 📌 **Event Categories & Priorities**
 
