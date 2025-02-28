@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   View,
   TextInput,
-  Button,
   Alert,
   TouchableOpacity,
   Text,
@@ -32,17 +31,49 @@ const EventForm = ({ route }) => {
   const [showStartTimePicker, setShowStartTimePicker] = useState(false);
   const [showEndTimePicker, setShowEndTimePicker] = useState(false);
 
+  // Prevent past date events
+  const isPastDate = new Date(selectedDate) < new Date().setHours(0, 0, 0, 0);
+
+  // Function to check for overlapping events
+  const hasOverlap = () => {
+    return Object.keys(events[selectedDate] || {}).some((eventKey) => {
+      const event = events[selectedDate][eventKey];
+      const eventStart = new Date(event.startTime);
+      const eventEnd = new Date(event.endTime);
+      return (
+        (startTime >= eventStart && startTime < eventEnd) ||
+        (endTime > eventStart && endTime <= eventEnd) ||
+        (startTime <= eventStart && endTime >= eventEnd)
+      );
+    });
+  };
+
   const handleSave = () => {
     if (!eventName) {
       Alert.alert('Error', 'Event name cannot be empty');
       return;
     }
+
+    if (isPastDate) {
+      Alert.alert('Error', 'You cannot create events in the past.');
+      return;
+    }
+
+    if (endTime <= startTime) {
+      Alert.alert('Error', 'End time must be after start time.');
+      return;
+    }
+
+    if (hasOverlap()) {
+      Alert.alert('Error', 'This event conflicts with another scheduled event.');
+      return;
+    }
+
     dispatch(
       addEvent({
         date: selectedDate,
         name: eventName,
-        startTime,
-        startTime: startTime.toISOString(), // Convert Date to string
+        startTime: startTime.toISOString(),
         endTime: endTime.toISOString(),
       })
     );
@@ -60,14 +91,22 @@ const EventForm = ({ route }) => {
 
   const onChangeStartTime = (event, selectedTime) => {
     if (selectedTime) {
-      setStartTime(selectedTime);
+      if (selectedTime < new Date()) {
+        Alert.alert('Error', 'You cannot select a past time.');
+      } else {
+        setStartTime(selectedTime);
+      }
     }
     setShowStartTimePicker(false);
   };
 
   const onChangeEndTime = (event, selectedTime) => {
     if (selectedTime) {
-      setEndTime(selectedTime);
+      if (selectedTime <= startTime) {
+        Alert.alert('Error', 'End time must be after start time.');
+      } else {
+        setEndTime(selectedTime);
+      }
     }
     setShowEndTimePicker(false);
   };
@@ -149,7 +188,11 @@ const EventForm = ({ route }) => {
         </View>
       </View>
 
-      <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+      <TouchableOpacity
+        style={[styles.saveButton, isPastDate && styles.disabledButton]}
+        onPress={handleSave}
+        disabled={isPastDate}
+      >
         <Text style={styles.btnText}>Save Event</Text>
       </TouchableOpacity>
       {existingEvent.name && (
@@ -187,6 +230,9 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 30,
     marginHorizontal: 20,
+  },
+  disabledButton: {
+    backgroundColor: '#ccc',
   },
   deleteButton: {
     backgroundColor: 'red',

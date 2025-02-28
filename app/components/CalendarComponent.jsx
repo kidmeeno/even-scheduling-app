@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { useSelector } from 'react-redux';
 
@@ -7,20 +6,42 @@ const CalendarComponent = ({ selectedDate, onDateSelect }) => {
   const events = useSelector((state) => state.events.events);
 
   const markedDates = Object.keys(events).reduce((acc, date) => {
-    acc[date] = { marked: true, dotColor: 'orange' };
+    acc[date] = { 
+      selected: true, 
+      customStyles: {
+        container: {
+          backgroundColor: '#ffeb99',
+        },
+        text: {
+          color: '#feca57', 
+          fontWeight: 'bold', 
+        }
+      }
+    };
     return acc;
   }, {});
 
-  markedDates[selectedDate] = { selected: true, selectedColor: '#feca57' };
+  markedDates[selectedDate] = { 
+    selected: true, 
+    customStyles: {
+      container: {
+        backgroundColor: '#feca57', 
+      },
+      text: {
+        color: '#fff', 
+        fontWeight: 'bold', 
+      }
+    }
+  };
 
   return (
     <Calendar
       current={selectedDate}
       onDayPress={(day) => onDateSelect(day.dateString)}
       markedDates={markedDates}
+      markingType="custom" 
       theme={{
-        selectedDayBackgroundColor: '#feca57',
-        todayTextColor: '#000',
+        todayTextColor: '#fff',
         arrowColor: '#feca57',
       }}
     />
