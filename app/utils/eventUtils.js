@@ -8,7 +8,7 @@ export const getRecurringEvents = (events) => {
   
       if (event.repeat === 'Weekly') {
         let newDate = new Date(date);
-        while (newDate < today.setMonth(today.getMonth() + 3)) { // Limit to 3 months ahead
+        while (newDate < today.setMonth(today.getMonth() + 3)) { 
           newDate.setDate(newDate.getDate() + 7);
           markedDates[newDate.toISOString().split('T')[0]] = { marked: true, dotColor: 'yellow' };
         }

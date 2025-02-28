@@ -22,13 +22,19 @@ The **Event Scheduler App** is a mobile application built using **React Native**
 📦 EventSchedulerApp
  ┣ 📂 app
  ┃ ┣ 📂 components
- ┃ ┃ ┗ 📜 EventForm.js
+ ┃ ┃ ┗ 📜 CalenderComponent.jsx
+ ┃ ┃ ┗ 📜 EventActions.jsx
+ ┃ ┃ ┗ 📜 EventInput.jsx
+ ┃ ┃ ┗ 📜 RepeatPicker.jsx
+ ┃ ┃ ┗ 📜 TimePickerField.jsx
  ┃ ┣ 📂 hooks
  ┃ ┃ ┗ 📜 useEventForm.js
+ ┃ ┃ ┗ 📜 useHomeScreen.js
  ┃ ┣ 📂 styles
  ┃ ┃ ┗ 📜 EventFormStyles.js
- ┃ ┣ 📜 App.js
- ┃ ┗ 📜 navigation.js
+ ┃ ┃ ┗ 📜 HomeScreenStyle.js
+ ┃ ┣ 📜 index.js
+ ┃ ┗ 📜 Navigation.js
  ┣ 📜 package.json
  ┣ 📜 README.md
  ┗ 📜 app.json
