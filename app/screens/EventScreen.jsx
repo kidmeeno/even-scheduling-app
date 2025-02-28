@@ -14,8 +14,6 @@ const EventForm = ({ route }) => {
     setEventName,
     startTime,
     endTime,
-    setStartTime,
-    setEndTime,
     repeat,
     setRepeat,
     showStartTimePicker,
