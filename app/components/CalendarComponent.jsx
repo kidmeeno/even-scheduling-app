@@ -41,7 +41,7 @@ const CalendarComponent = ({ selectedDate, onDateSelect }) => {
       markedDates={markedDates}
       markingType="custom" 
       theme={{
-        todayTextColor: '#fff',
+        todayTextColor: '#000',
         arrowColor: '#feca57',
       }}
     />
