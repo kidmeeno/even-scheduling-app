@@ -1,17 +1,11 @@
 import React from 'react';
-import {
-  View,
-  TextInput,
-  Alert,
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  Platform,
-} from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import { View } from 'react-native';
 import useEventForm from '../hooks/useEventForm';
 import styles from '../styles/EventFormStyles';
+import EventInput from '../components/EventInput';
+import TimePickerField from '../components/TimePickerField';
+import RepeatPicker from '../components/RepeatPicker';
+import EventActions from '../components/EventActions';
 
 const EventForm = ({ route }) => {
   const { selectedDate } = route.params;
@@ -39,84 +33,30 @@ const EventForm = ({ route }) => {
   return (
     <View style={styles.container}>
       <View style={styles.eventFormWrapper}>
-        <View style={styles.formRow}>
-          <Text>Name</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Event Name"
-            value={eventName}
-            onChangeText={setEventName}
-          />
-        </View>
-
-        <View style={styles.formRow}>
-          <Text>Start Time</Text>
-          <TouchableOpacity
-            style={styles.timePicker}
-            onPress={() => setShowStartTimePicker(true)}
-          >
-            <Text style={styles.timeText}>
-              {startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        {showStartTimePicker && (
-          <DateTimePicker
-            value={startTime}
-            mode="time"
-            display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-            onChange={onChangeStartTime}
-          />
-        )}
-
-        <View style={styles.formRow}>
-          <Text>End Time</Text>
-          <TouchableOpacity
-            style={styles.timePicker}
-            onPress={() => setShowEndTimePicker(true)}
-          >
-            <Text style={styles.timeText}>
-              {endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        {showEndTimePicker && (
-          <DateTimePicker
-            value={endTime}
-            mode="time"
-            display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-            onChange={onChangeEndTime}
-          />
-        )}
-
-        <View style={styles.formRow}>
-          <Text>Repeat</Text>
-          <TouchableOpacity style={styles.picker}>
-            <Picker selectedValue={repeat} onValueChange={setRepeat}>
-              <Picker.Item label="None" value="None" />
-              <Picker.Item label="Weekly" value="Weekly" />
-              <Picker.Item label="Bi-weekly" value="Bi-weekly" />
-              <Picker.Item label="Monthly" value="Monthly" />
-            </Picker>
-          </TouchableOpacity>
-        </View>
+        <EventInput label="Event Name" value={eventName} onChangeText={setEventName} />
+        <TimePickerField 
+          label="Start Time" 
+          time={startTime} 
+          showPicker={showStartTimePicker} 
+          setShowPicker={setShowStartTimePicker} 
+          onChangeTime={onChangeStartTime} 
+        />
+        <TimePickerField 
+          label="End Time" 
+          time={endTime} 
+          showPicker={showEndTimePicker} 
+          setShowPicker={setShowEndTimePicker} 
+          onChangeTime={onChangeEndTime} 
+        />
+        <RepeatPicker repeat={repeat} setRepeat={setRepeat} />
       </View>
 
-      <TouchableOpacity
-        style={[styles.saveButton, isPastDate && styles.disabledButton]}
-        onPress={handleSave}
-        disabled={isPastDate}
-      >
-        <Text style={styles.btnText}>Save Event</Text>
-      </TouchableOpacity>
-
-      {existingEvent.name && (
-        <TouchableOpacity style={styles.deleteButton} onPress={handleDelete}>
-          <Text style={styles.btnText}>Delete Event</Text>
-        </TouchableOpacity>
-      )}
+      <EventActions 
+        isPastDate={isPastDate} 
+        handleSave={handleSave} 
+        existingEvent={existingEvent} 
+        handleDelete={handleDelete} 
+      />
     </View>
   );
 };
