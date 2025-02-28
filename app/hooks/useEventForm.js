@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { Alert, Platform } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { addEvent, deleteEvent } from '../redux/eventsSlice';
+import { useNavigation } from '@react-navigation/native';
 
 const useEventForm = (selectedDate) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const events = useSelector((state) => state.events.events);
   const existingEvent = events[selectedDate] || {};
 
@@ -54,7 +56,10 @@ const useEventForm = (selectedDate) => {
     }
 
     if (hasOverlap()) {
-      Alert.alert('Error', 'This event conflicts with another scheduled event.');
+      Alert.alert(
+        'Error',
+        'This event conflicts with another scheduled event.'
+      );
       return;
     }
 
@@ -67,6 +72,9 @@ const useEventForm = (selectedDate) => {
         repeat,
       })
     );
+    setTimeout(() => {
+      navigation.goBack();
+    }, 1000);
   };
 
   const handleDelete = () => {
@@ -74,7 +82,7 @@ const useEventForm = (selectedDate) => {
       { text: 'Cancel', style: 'cancel' },
       {
         text: 'Delete',
-        onPress: () => dispatch(deleteEvent({ date: selectedDate })),
+        onPress: () => {dispatch(deleteEvent({ date: selectedDate })); navigation.goBack();},
       },
     ]);
   };
