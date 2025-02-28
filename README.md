@@ -1,50 +1,101 @@
-# Welcome to your Expo app 👋
+# Event Scheduler App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## 📌 Overview
+The **Event Scheduler App** is a mobile application built using **React Native** and **Expo**, allowing users to efficiently create, manage, and delete scheduled events. The app provides an intuitive interface to input event details, set start and end times, choose repeat options, and handle event persistence.
 
-## Get started
+## 🚀 Features
+- 📅 **Event Creation**: Users can add events by entering a name, start time, and end time.
+- 🕒 **Time Selection**: Seamless selection of start and end times using the DateTimePicker.
+- 🔁 **Recurring Events**: Options to set event repetition (None, Weekly, Bi-weekly, Monthly).
+- 🗑️ **Event Deletion**: Remove events when they are no longer needed.
+- 🚫 **Validation for Past Dates**: Prevents users from scheduling events in the past.
+- 🎨 **Styled with External Stylesheets**: Ensures a clean and maintainable code structure.
 
-1. Install dependencies
+## 🏗️ Tech Stack
+- **React Native** (Expo Framework)
+- **Expo DateTimePicker** (`@react-native-community/datetimepicker`)
+- **Expo Picker** (`@react-native-picker/picker`)
+- **State Management** (React hooks)
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+## 📂 Project Structure
+```
+📦 EventSchedulerApp
+ ┣ 📂 app
+ ┃ ┣ 📂 components
+ ┃ ┃ ┗ 📜 EventForm.js
+ ┃ ┣ 📂 hooks
+ ┃ ┃ ┗ 📜 useEventForm.js
+ ┃ ┣ 📂 styles
+ ┃ ┃ ┗ 📜 EventFormStyles.js
+ ┃ ┣ 📜 App.js
+ ┃ ┗ 📜 navigation.js
+ ┣ 📜 package.json
+ ┣ 📜 README.md
+ ┗ 📜 app.json
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🔧 Installation & Setup
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/your-username/EventSchedulerApp.git
+   cd EventSchedulerApp
+   ```
+2. **Install dependencies:**
+   ```sh
+   npm install
+   ```
+   or
+   ```sh
+   yarn install
+   ```
+3. **Start the Expo development server:**
+   ```sh
+   expo start
+   ```
+4. **Run on an emulator or physical device:**
+   - Scan the QR code from the Expo Go app on your phone.
+   - Use an emulator (`expo run:android` or `expo run:ios`).
 
-## Learn more
+## 📲 Usage
+1. Launch the app.
+2. Select a date to schedule an event.
+3. Enter the event name.
+4. Pick a start time and an end time.
+5. Choose a repeat option if necessary.
+6. Click **Save Event** to store it.
+7. Delete an event if no longer needed.
 
-To learn more about developing your project with Expo, look at the following resources:
+## 🛠️ Dependencies
+```json
+{
+  "dependencies": {
+    "expo": "^49.0.0",
+    "react": "18.0.0",
+    "react-native": "0.72.0",
+    "@react-native-community/datetimepicker": "^6.8.1",
+    "@react-native-picker/picker": "^2.4.8"
+  }
+}
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 🚀 Future Enhancements
+- ⏰ **Event Notifications & Reminders**
+- 🗄️ **Local Storage for Event Persistence**
+- 🎨 **Dark Mode Support**
+- 📌 **Event Categories & Priorities**
 
-## Join the community
+## 🤝 Contributing
+Feel free to contribute! Follow these steps:
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-name`).
+3. Commit your changes (`git commit -m "Add new feature"`).
+4. Push to the branch (`git push origin feature-name`).
+5. Open a Pull Request.
 
-Join our community of developers creating universal apps.
+## 📄 License
+This project is licensed under the **MIT License**.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---
+
+🔥 Built with **Expo & React Native** ❤️
+
