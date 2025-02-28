@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addEvent, deleteEvent } from '../redux/eventsSlice';
 import {Picker} from '@react-native-picker/picker';
 
-const EventForm = ({ selectedDate, onClose }) => {
+const EventForm = ({ route }) => {
+  const { selectedDate } = route.params;
   const dispatch = useDispatch();
   const events = useSelector(state => state.events.events);
   const existingEvent = events[selectedDate] || {};
@@ -20,7 +21,6 @@ const EventForm = ({ selectedDate, onClose }) => {
       return;
     }
     dispatch(addEvent({ date: selectedDate, name: eventName, startTime, endTime, repeat }));
-    onClose();
   };
 
   const handleDelete = () => {
@@ -31,12 +31,12 @@ const EventForm = ({ selectedDate, onClose }) => {
         { text: "Cancel", style: "cancel" },
         { text: "Delete", onPress: () => {
             dispatch(deleteEvent({ date: selectedDate }));
-            onClose();
           }
         }
       ]
     );
   };
+  
 
   return (
     <View>
