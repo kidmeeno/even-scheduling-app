@@ -5,6 +5,6 @@ const store = configureStore({
   reducer: { events: eventReducer },
 });
 
-store.dispatch(loadEvents()); // Load stored events on app startup
+store.dispatch(loadEvents()); 
 
 export default store;
